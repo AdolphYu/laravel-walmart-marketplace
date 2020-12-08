@@ -24,7 +24,6 @@ class PackageServiceProvider extends ServiceProvider
             ], 'config');
         }
 
-        $this->registerRoutes();
     }
 
     public function register()
