@@ -1,0 +1,44 @@
+{
+    "name": "adolphyu/laravel-walmart-marketplace",
+    "description": "A Laravel Package to Integrate Walmart Marketplace API",
+    "keywords": [
+        "walmart",
+        "marketplace",
+        "api",
+        "laravel"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adolph",
+            "email": "adolph@ceramicss.com"
+        }
+    ],
+
+    "autoload": {
+        "psr-4": {
+            "AdolphYu\\WalmartMarketplace\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AdolphYu\\WalmartMarketplace\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "AdolphYu\\WalmartMarketplace\\PackageServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "~6.0",
+        "illuminate/support": "^7.0|^8.0",
+        "php": "^7.3"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^5.0",
+        "phpunit/phpunit": "^9.3"
+    }
+}
