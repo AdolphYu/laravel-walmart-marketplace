@@ -19,7 +19,7 @@ class ItemRequest extends Request
      */
     public function taxonomy($param){
         return $this->getAuthRequest()
-            ->get('/v3/items/taxonomy',$param);
+            ->get('/v3'.$this->getCountry().'/items/taxonomy',$param);
 
     }
 
@@ -30,7 +30,7 @@ class ItemRequest extends Request
      */
     public function count($param){
         return $this->getAuthRequest()
-            ->get('/v3/items/count',$param);
+            ->get('/v3'.$this->getCountry().'/items/count',$param);
 
     }
 
@@ -41,7 +41,7 @@ class ItemRequest extends Request
      */
     public function info($id,$param){
         return $this->getAuthRequest()
-            ->get('/v3/items/'.$id,$param);
+            ->get('/v3'.$this->getCountry().'/items/'.$id,$param);
 
     }
 
@@ -52,7 +52,7 @@ class ItemRequest extends Request
      */
     public function search($param){
         return $this->getAuthRequest()
-            ->get('/v3/items/walmart/search',$param);
+            ->get('/v3'.$this->getCountry().'/items/walmart/search',$param);
 
     }
 
@@ -66,7 +66,7 @@ class ItemRequest extends Request
         $objects = collect();
         while(true){
             $response = $this->getAuthRequest()
-                ->get('/v3/items',$param);
+                ->get('/v3'.$this->getCountry().'/items',$param);
             $result = $response->json();
 
             if(isset($result['ItemResponse'])){

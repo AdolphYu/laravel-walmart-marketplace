@@ -4,29 +4,32 @@ namespace AdolphYu\WalmartMarketplace\Request;
 
 class OrderRequest extends Request
 {
-
+    public function __construct($config)
+    {
+        parent::__construct($config);
+    }
 
     public function list($param){
-        return $this->commonList('/v3/orders',$param,'order');
+        return $this->commonList('/v3'.$this->getCountry().'/orders',$param,'order');
     }
 
     public function order($id,$param){
         $response = $this->getAuthRequest()
-            ->get('/v3/orders/'.$id,$param);
+            ->get('/v3/'.$this->getCountry().'orders/'.$id,$param);
         return $response['order'];
     }
 
     public function listReleased($param){
-        return $this->commonList('/v3/orders/released',$param,'order');
+        return $this->commonList('/v3'.$this->getCountry().'/orders/released',$param,'order');
     }
 
     public function commonList($url,$param,$payload){
+
         $objects = collect();
         while(true){
             $response = $this->getAuthRequest()
                 ->get($url,$param);
             $result = $response->json();
-
             if(isset($result['list']['meta']['nextCursor'])){
                 $parseUrl = parse_url($result['list']['meta']['nextCursor']);
                 if($parseUrl['query']){

@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Cache;
 
 class PostTokenRequest extends Request
 {
+    public function __construct($config)
+    {
+        parent::__construct($config);
+    }
+
     public function send(){
         $response =  $this->getPendingRequest()->asForm()->post('/v3/token',['grant_type'=>'client_credentials']);
 

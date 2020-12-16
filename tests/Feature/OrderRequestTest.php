@@ -23,19 +23,19 @@ class OrderRequestTest extends TestCase
      */
     public function testList()
     {
-        $request = new OrderRequest();
-        $request->setConfig([
+
+        $request = new OrderRequest([
             'channel_type'=>Env::get('WM_CHANNEL_TYPE', ''),
             'client_id'=>Env::get('WM_CLIENT_ID', ''),
             'client_secret'=>Env::get('WM_CLIENT_SECRET', ''),
+            'country'=>'us',
+            'mode'=>'prod',
         ]);
 
-        dd($request->list(['limit'=>'100','createdStartDate'=>Carbon::now()->subMinutes(60)->toIso8601String()])->first());
     }
 
     public function testOrder(){
-        $request = new OrderRequest();
-        $request->setConfig([
+        $request = new OrderRequest([
             'channel_type'=>Env::get('WM_CHANNEL_TYPE', ''),
             'client_id'=>Env::get('WM_CLIENT_ID', ''),
             'client_secret'=>Env::get('WM_CLIENT_SECRET', ''),
@@ -45,13 +45,12 @@ class OrderRequestTest extends TestCase
     }
 
     public function testListReleased (){
-        $request = new OrderRequest();
-        $request->setConfig([
+        $request = new OrderRequest([
             'channel_type'=>Env::get('WM_CHANNEL_TYPE', ''),
             'client_id'=>Env::get('WM_CLIENT_ID', ''),
             'client_secret'=>Env::get('WM_CLIENT_SECRET', ''),
         ]);
-        dd($request->listReleased(['limit'=>'100','createdStartDate'=>Carbon::now()->subMinutes(60)->toIso8601String()]));
+//        dd($request->listReleased(['limit'=>'100','createdStartDate'=>Carbon::now()->subMinutes(60)->toIso8601String()]));
 
     }
 

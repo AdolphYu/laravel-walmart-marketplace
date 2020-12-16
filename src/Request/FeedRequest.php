@@ -8,7 +8,7 @@ class FeedRequest extends Request
         $objects = collect();
         while(true){
             $response = $this->getAuthRequest()
-                ->get('/v3/feeds',$param);
+                ->get('/v3'.$this->getCountry().'/feeds',$param);
             $result = $response->json();
 
             if(isset($result['results']['feed'])){
@@ -44,7 +44,7 @@ class FeedRequest extends Request
     public function info($id,$param){
 
         return $this->getAuthRequest()
-            ->get('/v3/feeds/'.$id,$param);
+            ->get('/v3'.$this->getCountry().'/feeds/'.$id,$param);
 
     }
 

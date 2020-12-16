@@ -81,13 +81,12 @@ class ItemRequestTest extends TestCase
     public function testSearch()
     {
         try {
-            $request = new ItemRequest();
-            $request->isFetchAll = true;
-            $request->setConfig([
+            $request = new ItemRequest([
                 'channel_type' => Env::get('WM_CHANNEL_TYPE', ''),
                 'client_id' => Env::get('WM_CLIENT_ID', ''),
                 'client_secret' => Env::get('WM_CLIENT_SECRET', ''),
             ]);
+            $request->isFetchAll = true;
 //            dd($request->search(['upc'=>'','query'=>'ipad','gtin'=>''])->json());;
         } catch (\Illuminate\Http\Client\RequestException $e) {
             dd($e->response->json());
@@ -101,13 +100,12 @@ class ItemRequestTest extends TestCase
     public function testList()
     {
         try {
-            $request = new ItemRequest();
-//            $request->isFetchAll = true;
-            $request->setConfig([
+            $request = new ItemRequest([
                 'channel_type' => Env::get('WM_CHANNEL_TYPE', ''),
                 'client_id' => Env::get('WM_CLIENT_ID', ''),
                 'client_secret' => Env::get('WM_CLIENT_SECRET', ''),
             ]);
+//            $request->isFetchAll = true;
             dd($request->list(['limit'=>1])->first());;
         } catch (\Illuminate\Http\Client\RequestException $e) {
             dd($e->response->json());

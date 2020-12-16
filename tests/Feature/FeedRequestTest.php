@@ -23,13 +23,12 @@ class FeedRequestTest extends TestCase
      */
     public function testList()
     {
-        $request = new FeedRequest();
-        $request->isFetchAll= true;
-        $request->setConfig([
-            'channel_type'=>Env::get('WM_CHANNEL_TYPE', ''),
-            'client_id'=>Env::get('WM_CLIENT_ID', ''),
-            'client_secret'=>Env::get('WM_CLIENT_SECRET', ''),
+        $request = new FeedRequest([
+            'channel_type' => Env::get('WM_CHANNEL_TYPE', ''),
+            'client_id' => Env::get('WM_CLIENT_ID', ''),
+            'client_secret' => Env::get('WM_CLIENT_SECRET', ''),
         ]);
+        $request->isFetchAll= true;
     }
 
     /**
@@ -37,11 +36,10 @@ class FeedRequestTest extends TestCase
      */
     public function testInfo()
     {
-        $request = new FeedRequest();
-        $request->setConfig([
-            'channel_type'=>Env::get('WM_CHANNEL_TYPE', ''),
-            'client_id'=>Env::get('WM_CLIENT_ID', ''),
-            'client_secret'=>Env::get('WM_CLIENT_SECRET', ''),
+        $request = new FeedRequest([
+            'channel_type' => Env::get('WM_CHANNEL_TYPE', ''),
+            'client_id' => Env::get('WM_CLIENT_ID', ''),
+            'client_secret' => Env::get('WM_CLIENT_SECRET', ''),
         ]);
         dd($request->info('D7C19C6DBA0B48B389CC9D9AB2EB49F4@AREBAQA',[])->json());
     }
