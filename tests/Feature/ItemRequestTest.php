@@ -25,14 +25,16 @@ class ItemRequestTest extends TestCase
      */
     public function testTaxonomy()
     {
-        $request = new ItemRequest();
-        $request->isFetchAll = true;
-        $request->setConfig([
+        $request = new ItemRequest([
             'channel_type' => Env::get('WM_CHANNEL_TYPE', ''),
             'client_id' => Env::get('WM_CLIENT_ID', ''),
             'client_secret' => Env::get('WM_CLIENT_SECRET', ''),
+            'country'=>'us',
+            'mode'=>'prod',
         ]);
-//        dd($request->taxonomy([])->json());
+//        $request->isFetchAll = true;
+//        $request->setConfig();
+//        dd($request->taxonomy([]));
     }
 
     /**
@@ -41,14 +43,15 @@ class ItemRequestTest extends TestCase
     public function testCount()
     {
         try {
-            $request = new ItemRequest();
-            $request->isFetchAll = true;
-            $request->setConfig([
+            $request = new ItemRequest([
                 'channel_type' => Env::get('WM_CHANNEL_TYPE', ''),
                 'client_id' => Env::get('WM_CLIENT_ID', ''),
                 'client_secret' => Env::get('WM_CLIENT_SECRET', ''),
+                'country'=>'us',
+                'mode'=>'prod',
             ]);
-//            dd($request->count(['status'=>'PUBLISHED'])->json());;
+//            $request->isFetchAll = true;
+//            dd($request->count(['status'=>'PUBLISHED']));;
         } catch (\Illuminate\Http\Client\RequestException $e) {
             dd($e->response->json());
         }
@@ -61,14 +64,15 @@ class ItemRequestTest extends TestCase
     public function testInfo()
     {
         try {
-            $request = new ItemRequest();
-            $request->isFetchAll = true;
-            $request->setConfig([
+            $request = new ItemRequest([
                 'channel_type' => Env::get('WM_CHANNEL_TYPE', ''),
                 'client_id' => Env::get('WM_CLIENT_ID', ''),
                 'client_secret' => Env::get('WM_CLIENT_SECRET', ''),
+                'country'=>'us',
+                'mode'=>'prod',
             ]);
-//            dd($request->info('432541287',['productIdType'=>'ITEM_ID'])->json());;
+//            $request->isFetchAll = true;
+//            dd($request->info('42V1547UAAJR0'));
         } catch (\Illuminate\Http\Client\RequestException $e) {
             dd($e->response->json());
         }
@@ -81,13 +85,9 @@ class ItemRequestTest extends TestCase
     public function testSearch()
     {
         try {
-            $request = new ItemRequest([
-                'channel_type' => Env::get('WM_CHANNEL_TYPE', ''),
-                'client_id' => Env::get('WM_CLIENT_ID', ''),
-                'client_secret' => Env::get('WM_CLIENT_SECRET', ''),
-            ]);
+            $request = new ItemRequest($this->config);
             $request->isFetchAll = true;
-//            dd($request->search(['upc'=>'','query'=>'ipad','gtin'=>''])->json());;
+//            dd($request->search(['upc'=>'','query'=>'ipad','gtin'=>'']));;
         } catch (\Illuminate\Http\Client\RequestException $e) {
             dd($e->response->json());
         }
@@ -100,13 +100,9 @@ class ItemRequestTest extends TestCase
     public function testList()
     {
         try {
-            $request = new ItemRequest([
-                'channel_type' => Env::get('WM_CHANNEL_TYPE', ''),
-                'client_id' => Env::get('WM_CLIENT_ID', ''),
-                'client_secret' => Env::get('WM_CLIENT_SECRET', ''),
-            ]);
+            $request = new ItemRequest($this->config);
 //            $request->isFetchAll = true;
-            dd($request->list(['limit'=>1])->first());;
+            dd($request->list(['limit'=>1]));;
         } catch (\Illuminate\Http\Client\RequestException $e) {
             dd($e->response->json());
         }

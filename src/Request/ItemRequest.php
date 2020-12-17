@@ -19,7 +19,7 @@ class ItemRequest extends Request
      */
     public function taxonomy($param){
         return $this->getAuthRequest()
-            ->get('/v3'.$this->getCountry().'/items/taxonomy',$param);
+            ->get('/v3'.$this->getCountry().'/items/taxonomy',$param)->json();
 
     }
 
@@ -30,7 +30,7 @@ class ItemRequest extends Request
      */
     public function count($param){
         return $this->getAuthRequest()
-            ->get('/v3'.$this->getCountry().'/items/count',$param);
+            ->get('/v3'.$this->getCountry().'/items/count',$param)->json();
 
     }
 
@@ -39,9 +39,9 @@ class ItemRequest extends Request
      * @param $param
      * @return \Illuminate\Http\Client\Response
      */
-    public function info($id,$param){
+    public function info($id,$param=[]){
         return $this->getAuthRequest()
-            ->get('/v3'.$this->getCountry().'/items/'.$id,$param);
+            ->get('/v3'.$this->getCountry().'/items/'.$id,$param)->json();
 
     }
 
@@ -52,7 +52,7 @@ class ItemRequest extends Request
      */
     public function search($param){
         return $this->getAuthRequest()
-            ->get('/v3'.$this->getCountry().'/items/walmart/search',$param);
+            ->get('/v3'.$this->getCountry().'/items/walmart/search',$param)->json();
 
     }
 

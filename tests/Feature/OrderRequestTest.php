@@ -32,6 +32,8 @@ class OrderRequestTest extends TestCase
             'mode'=>'prod',
         ]);
 
+//        dd($request->list(['limit'=>1]));
+
     }
 
     public function testOrder(){
@@ -39,6 +41,8 @@ class OrderRequestTest extends TestCase
             'channel_type'=>Env::get('WM_CHANNEL_TYPE', ''),
             'client_id'=>Env::get('WM_CLIENT_ID', ''),
             'client_secret'=>Env::get('WM_CLIENT_SECRET', ''),
+            'country'=>'us',
+            'mode'=>'prod',
         ]);
 //        dd($request->order('4803445924832',[]));
 
@@ -49,7 +53,10 @@ class OrderRequestTest extends TestCase
             'channel_type'=>Env::get('WM_CHANNEL_TYPE', ''),
             'client_id'=>Env::get('WM_CLIENT_ID', ''),
             'client_secret'=>Env::get('WM_CLIENT_SECRET', ''),
+            'country'=>'us',
+            'mode'=>'prod',
         ]);
+        dd($request->listReleased(['limit'=>'1']));
 //        dd($request->listReleased(['limit'=>'100','createdStartDate'=>Carbon::now()->subMinutes(60)->toIso8601String()]));
 
     }
