@@ -5,12 +5,14 @@ namespace AdolphYu\WalmartMarketplace\Request;
 class FeedRequest extends Request
 {
     public function list($param){
+
+
+        return  $this->getAuthRequest()
+            ->get('/v3'.$this->getCountry().'/feeds',$param);
         $objects = collect();
         while(true){
-            $response = $this->getAuthRequest()
-                ->get('/v3'.$this->getCountry().'/feeds',$param);
-            $result = $response->json();
 
+            $result = $response->json();
             if(isset($result['results']['feed'])){
                 foreach ($result['results']['feed'] as $object){
                     $objects->push($object);
@@ -29,6 +31,10 @@ class FeedRequest extends Request
                 $param = array_merge($param,[
                     'offset'=>$result['offset']+$result['limit']
                 ]);
+            }
+
+            if($this->config->mode=='dev'){
+                break;
             }
         }
         return $objects;

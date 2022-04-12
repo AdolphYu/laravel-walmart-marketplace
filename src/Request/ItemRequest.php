@@ -11,83 +11,84 @@ use Illuminate\Support\Collection;
  */
 class ItemRequest extends Request
 {
+
     /**
-     * taxonomy
+     * @param array $param
+     * @return \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response
+     */
+    public function taxonomy($param=[]){
+        return $this->getAuthRequest()
+            ->get('/v3'.$this->getCountry().'/items/taxonomy',$param);
+
+    }
+
+    /**
+     * @param array $param
+     * @return \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response
+     */
+    public function count($param=[]){
+        return $this->getAuthRequest()
+            ->get('/v3'.$this->getCountry().'/items/count',$param);
+
+    }
+
+    /**
      * @param $id
-     * @param $param
-     * @return \Illuminate\Http\Client\Response
-     */
-    public function taxonomy($param){
-        return $this->getAuthRequest()
-            ->get('/v3'.$this->getCountry().'/items/taxonomy',$param)->json();
-
-    }
-
-    /**
-     * itemCount
-     * @param $param
-     * @return \Illuminate\Http\Client\Response
-     */
-    public function count($param){
-        return $this->getAuthRequest()
-            ->get('/v3'.$this->getCountry().'/items/count',$param)->json();
-
-    }
-
-    /**
-     * info
-     * @param $param
-     * @return \Illuminate\Http\Client\Response
+     * @param array $param
+     * @return \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response
      */
     public function info($id,$param=[]){
         return $this->getAuthRequest()
-            ->get('/v3'.$this->getCountry().'/items/'.$id,$param)->json();
+            ->get('/v3'.$this->getCountry().'/items/'.$id,$param);
 
     }
 
     /**
-     * search
      * @param $param
-     * @return \Illuminate\Http\Client\Response
+     * @return \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response
      */
-    public function search($param){
+    public function search($param=[]){
         return $this->getAuthRequest()
-            ->get('/v3'.$this->getCountry().'/items/walmart/search',$param)->json();
+            ->get('/v3'.$this->getCountry().'/items/walmart/search',$param);
 
     }
 
 
     /**
-     * search
+     *
      * @param $param
-     * @return Collection
+     * @return \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response|mixed
      */
-    public function list($param){
+    public function list($param=[]){
         $objects = collect();
-        while(true){
-            $response = $this->getAuthRequest()
-                ->get('/v3'.$this->getCountry().'/items',$param);
-            $result = $response->json();
 
-            if(isset($result['ItemResponse'])){
-                foreach ($result['ItemResponse'] as $object){
-                    $objects->push($object);
-                }
-            }
+        return $this->getAuthRequest()
+            ->get('/v3'.$this->getCountry().'/items',$param);
 
-            if(isset($result['nextCursor'])){
-                $param = array_merge($param,[
-                    'nextCursor'=>$result['nextCursor']
-                ]);
-            }else{
-                break;
-            }
-
-            if($this->isFetchAll===false){
-                break;
-            }
-        }
-        return $objects;
+//        while(true){
+//            $response = $this->getAuthRequest()
+//                ->get('/v3'.$this->getCountry().'/items',$param);
+//            $result = $response->json();
+//
+//            if(isset($result['ItemResponse'])){
+//                foreach ($result['ItemResponse'] as $object){
+//                    $objects->push($object);
+//                }
+//            }
+//
+//            if(isset($result['nextCursor'])){
+//                $param = array_merge($param,[
+//                    'nextCursor'=>$result['nextCursor']
+//                ]);
+//            }else{
+//                break;
+//            }
+//
+//            if($this->isFetchAll===false){
+//                break;
+//            }
+//        }
+//        return $objects;
 
 
 //        return $this->getAuthRequest()
@@ -96,5 +97,43 @@ class ItemRequest extends Request
     }
 
 
+    /**
+     * @param $param
+     * @return \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response
+     */
+    public function associations($param=[]){
+        return $this->getAuthRequest()
+            ->post('/v3'.$this->getCountry().'/items/associations',$param);
+    }
+
+
+    /**
+     * catalog search
+     * @param array $param
+     * @return \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response
+     */
+    public function catalogSearch($param = []){
+        return $this->getAuthRequest()
+            ->post('/v3'.$this->getCountry().'/items/catalog/search',$param);
+    }
+
+    /**
+     * Get item count by groups
+     * @param array $param
+     * @return \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response
+     */
+    public function groupsCount($param = []){
+        return $this->getAuthRequest()
+            ->get('/v3'.$this->getCountry().'/items/groups/count',$param);
+    }
+
+    /**
+     * @param $param
+     * @return \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response
+     */
+    public function bulkItemSetup($param){
+        return $this->getAuthRequest()
+            ->post('/v3'.$this->getCountry().'/feeds',$param);
+    }
 
 }
