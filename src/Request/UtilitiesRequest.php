@@ -21,4 +21,9 @@ class UtilitiesRequest extends Request
             ->get('/v3'.$this->getCountry().'/utilities/taxonomy/departments/'.$id,$param);
     }
 
+    public function apiStatus($param=[]){
+        return  $this->getAuthRequest()
+            ->get('/v3'.$this->getCountry().'/utilities/apiStatus',$param);
+    }
+
 }
