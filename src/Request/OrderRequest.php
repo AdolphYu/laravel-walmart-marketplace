@@ -10,7 +10,8 @@ class OrderRequest extends Request
     }
 
     public function list($param){
-        return $this->commonList('/v3'.$this->getCountry().'/orders',$param,'order');
+        return  $this->getAuthRequest()
+            ->get('/v3'.$this->getCountry().'/orders',$param);
     }
 
     public function order($id,$param){
@@ -20,7 +21,8 @@ class OrderRequest extends Request
     }
 
     public function listReleased($param){
-        return $this->commonList('/v3'.$this->getCountry().'/orders/released',$param,'order');
+        return  $this->getAuthRequest()
+            ->get('/v3'.$this->getCountry().'/orders/released',$param);
     }
 
     public function commonList($url,$param,$payload){
