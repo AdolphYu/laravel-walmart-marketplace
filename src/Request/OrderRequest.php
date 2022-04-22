@@ -15,9 +15,8 @@ class OrderRequest extends Request
     }
 
     public function order($id,$param){
-        $response = $this->getAuthRequest()
+        return  $this->getAuthRequest()
             ->get('/v3/'.$this->getCountry().'orders/'.$id,$param);
-        return $response['order'];
     }
 
     public function listReleased($param){

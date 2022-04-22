@@ -21,6 +21,10 @@ class UtilitiesRequest extends Request
             ->get('/v3'.$this->getCountry().'/utilities/taxonomy/departments/'.$id,$param);
     }
 
+    /**
+     * @param array $param
+     * @return \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response
+     */
     public function apiStatus($param=[]){
         return  $this->getAuthRequest()
             ->get('/v3'.$this->getCountry().'/utilities/apiStatus',$param);
