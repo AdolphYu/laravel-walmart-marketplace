@@ -136,4 +136,14 @@ class ItemRequest extends Request
             ->post('/v3'.$this->getCountry().'/feeds',$param);
     }
 
+    /**
+     * price
+     * @param array $param
+     * @return \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response
+     */
+    public function price($param = []){
+        return $this->getAuthRequest()
+            ->put('/v3'.$this->getCountry().'/price',$param);
+    }
+
 }
