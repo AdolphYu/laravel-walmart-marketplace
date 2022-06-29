@@ -131,9 +131,9 @@ class ItemRequest extends Request
      * @param $param
      * @return \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response
      */
-    public function bulkItemSetup($param){
+    public function bulkItemSetup($type,$param){
         return $this->getAuthRequest()
-            ->post('/v3'.$this->getCountry().'/feeds',$param);
+            ->post('/v3'.$this->getCountry().'/feeds?feedType='.$type,$param);
     }
 
     /**
@@ -144,6 +144,17 @@ class ItemRequest extends Request
     public function price($param = []){
         return $this->getAuthRequest()
             ->put('/v3'.$this->getCountry().'/price',$param);
+    }
+
+
+    /**
+     * promotionalPrice
+     * @param array $param
+     * @return \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response
+     */
+    public function promotionalPrice($id){
+        return $this->getAuthRequest()
+            ->get('/v3'.$this->getCountry().'/promo/sku/'.$id);
     }
 
 }
