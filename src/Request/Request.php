@@ -105,9 +105,14 @@ class Request
      */
     public function getAuthRequest()
     {
-        return $this->getPendingRequest()->retry(3, 100)->withHeaders([
-            'WM_SEC.ACCESS_TOKEN' => $this->getAccessToken()
-        ]);
+        if ($this->config->country == 'us') {
+            return $this->getPendingRequest()->retry(3, 100)->withHeaders([
+                'WM_SEC.ACCESS_TOKEN' => $this->getAccessToken()
+            ]);
+        }else{
+            return $this->getPendingRequest()->retry(3, 100);
+        }
+
     }
 
     /**
