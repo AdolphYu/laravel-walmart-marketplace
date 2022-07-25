@@ -13,14 +13,18 @@ class  Config extends Model
     public $client_secret;
     public $country;
     public $mode;
+    public $consumer_id;
+    public $private_key;
 
     public function __construct($config)
     {
         $this->channel_type = $config['channel_type'];
-        $this->client_id = $config['client_id'];
-        $this->client_secret = $config['client_secret'];
+        $this->client_id = $config['client_id'] ?? '';
+        $this->client_secret = $config['client_secret'] ?? '';
         $this->country = $config['country'] ?? 'us';
         $this->mode = $config['mode'] ?? 'dev';
+        $this->consumer_id = $config['consumer_id'] ?? '';
+        $this->private_key = $config['private_key'] ?? '';
     }
 
     public function toArray()
