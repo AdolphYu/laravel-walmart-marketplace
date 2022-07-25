@@ -62,9 +62,8 @@ class Request
                 'WM_SVC.NAME' => 'Walmart Service Name',
                 'Accept' => 'application/json'
             ];
-            return Http::withHeaders($headers)->baseUrl($this->base_url)->withBasicAuth($this->config->client_id, $this->config->client_secret)->withHeaders([
-                'WM_SEC.ACCESS_TOKEN' => $this->getAccessToken()
-            ]);
+//            dd(111,$this->getAccessToken());
+            return Http::withHeaders($headers)->baseUrl($this->base_url)->withBasicAuth($this->config->client_id, $this->config->client_secret);
         }
 
         if ($this->config->country == 'ca') {
@@ -106,9 +105,10 @@ class Request
      */
     public function getAuthRequest()
     {
-        return $this->getPendingRequest()->retry(3, 100);
+        return $this->getPendingRequest()->retry(3, 100)->withHeaders([
+            'WM_SEC.ACCESS_TOKEN' => $this->getAccessToken()
+        ]);
     }
-
 
     /**
      * set config
