@@ -92,7 +92,7 @@ class Request
 
                 }))->withMiddleware(
                 Middleware::mapResponse(function (ResponseInterface $response) {
-                    return $response->withBody(\GuzzleHttp\Psr7\Utils::streamFor(json_encode(XmlToArray::convert(str_replace("ns2:", "", $response->getBody())))));
+                    return $response->withBody(\GuzzleHttp\Psr7\Utils::streamFor(json_encode(XmlToArray::convert(str_replace(["ns2:","ns3:","ns4:"], "", $response->getBody())))));
                 })
             );
         }
