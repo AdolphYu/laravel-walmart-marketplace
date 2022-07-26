@@ -91,7 +91,11 @@ class Request
 
                 }))->withMiddleware(
                 Middleware::mapResponse(function (ResponseInterface $response) {
-                    return $response->withBody(\GuzzleHttp\Psr7\Utils::streamFor(json_encode(XmlToArray::convert(str_replace(["ns2:","ns3:","ns4:"], "", $response->getBody())))));
+                    if($this->getFileName($response->getHeaders())){
+                        return $response;
+                    }else{
+                        return $response->withBody(\GuzzleHttp\Psr7\Utils::streamFor(json_encode(XmlToArray::convert(str_replace(["ns2:","ns3:","ns4:"], "", $response->getBody())))));
+                    }
                 })
             );
         }
@@ -183,4 +187,15 @@ class Request
         return $urlString;
     }
 
+
+    public function getFileName($headers)
+    {
+        if (isset($headers['Content-Disposition'][0])) {
+            $fileInfo = explode(';', $headers['Content-Disposition'][0])[1] ?? '';
+//            dd($fileInfo);
+            return explode('=', $fileInfo)[1] ?? '';
+        } else {
+            return '';
+        }
+    }
 }

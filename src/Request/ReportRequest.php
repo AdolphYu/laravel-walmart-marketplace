@@ -13,7 +13,7 @@ class ReportRequest extends Request
     public function getReport($param)
     {
         return $this->getAuthRequest()
-            ->get('/v3' . $this->getCountry() . '/getReport', $param);
+            ->get('/v3/getReport', $param);
     }
 
 
