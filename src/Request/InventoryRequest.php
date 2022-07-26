@@ -39,10 +39,10 @@ class InventoryRequest extends Request
             ->get('/v3' . $this->getCountry() . '/inventory', $param);
     }
 
-    public function updateInventory($sku,$shipNode='',$param=[])
+    public function updateInventory($param=[])
     {
         return $this->getAuthRequest()
-            ->put('/v3' . $this->getCountry() . '/inventory?sku='.$sku.'&shipNode='.$shipNode, $param);
+            ->put('/v3' . $this->getCountry() . '/inventory',$param);
     }
 
 

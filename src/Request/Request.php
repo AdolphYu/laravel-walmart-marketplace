@@ -91,11 +91,12 @@ class Request
 
                 }))->withMiddleware(
                 Middleware::mapResponse(function (ResponseInterface $response) {
-                    if($this->getFileName($response->getHeaders())){
-                        return $response;
-                    }else{
-                        return $response->withBody(\GuzzleHttp\Psr7\Utils::streamFor(json_encode(XmlToArray::convert(str_replace(["ns2:","ns3:","ns4:"], "", $response->getBody())))));
+                    try {
+                        return $response->withBody(\GuzzleHttp\Psr7\Utils::streamFor(json_encode(XmlToArray::convert(str_replace(["ns2:","ns3:","ns4:"], "", $response->getBody())))));;
+                    }catch (\Throwable $e){
+
                     }
+                    return $response;
                 })
             );
         }
