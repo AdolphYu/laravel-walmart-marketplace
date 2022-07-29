@@ -2,6 +2,8 @@
 namespace AdolphYu\WalmartMarketplace\Request;
 
 
+use Carbon\Carbon;
+
 class UtilitiesRequest extends Request
 {
     public function taxonomy($param=[]){
@@ -26,8 +28,17 @@ class UtilitiesRequest extends Request
      * @return \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response
      */
     public function apiStatus($param=[]){
-        return  $this->getAuthRequest()
-            ->get('/v3'.$this->getCountry().'/utilities/apiStatus',$param);
+//        dd($this->getCountry());
+        //ca 用order代替
+        if ($this->config->country=='ca'){
+            $param = ['limit'=>1];
+            return  $this->getAuthRequest()
+                ->get('/v3'.$this->getCountry().'/items',$param);
+        }else{
+            return  $this->getAuthRequest()
+                ->get('/v3'.$this->getCountry().'/utilities/apiStatus',$param);
+        }
+
     }
 
 }
