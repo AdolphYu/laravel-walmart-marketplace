@@ -61,5 +61,24 @@ class OrderRequest extends Request
         return $objects;
     }
 
+    public function acknowledge($id){
+        return  $this->getAuthRequest()
+            ->post('/v3'.$this->getCountry().'/orders/'.$id.'/acknowledge');
+    }
+
+    public function cancel($id,$param){
+        return  $this->getAuthRequest()
+            ->post('/v3'.$this->getCountry().'/orders/'.$id.'/cancel',$param);
+    }
+
+    public function refund($id,$param){
+        return  $this->getAuthRequest()
+            ->post('/v3'.$this->getCountry().'/orders/'.$id.'/refund',$param);
+    }
+
+    public function shipping($id,$param){
+        return  $this->getAuthRequest()
+            ->post('/v3'.$this->getCountry().'/orders/'.$id.'/shipping',$param);
+    }
 
 }
