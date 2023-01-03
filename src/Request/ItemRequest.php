@@ -132,6 +132,7 @@ class ItemRequest extends Request
      * @return \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response
      */
     public function bulkItemSetup($type,$param){
+//        dd($param);
         return $this->getAuthRequest()
             ->post('/v3'.$this->getCountry().'/feeds?feedType='.$type,$param);
     }
