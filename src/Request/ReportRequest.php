@@ -29,5 +29,17 @@ class ReportRequest extends Request
             ->get('/v3' . $this->getCountry() . '/report/reconreport/reconFile', $param);
     }
 
+    public function paymentStatement($param)
+    {
+        return $this->getAuthRequest()
+            ->get('/v3' . $this->getCountry() . '/report/payment/statement', $param);
+    }
+
+    public function paymentPerformance($param)
+    {
+        return $this->getAuthRequest()
+            ->get('/v3' . $this->getCountry() . '/report/payment/performance', $param);
+    }
+
 
 }
