@@ -111,11 +111,11 @@ class Request
     public function getAuthRequest()
     {
         if ($this->config->country == 'us') {
-            return $this->getPendingRequest()->retry(3, 100)->withHeaders([
+            return $this->getPendingRequest()->withHeaders([
                 'WM_SEC.ACCESS_TOKEN' => $this->getAccessToken()
             ]);
         }else{
-            return $this->getPendingRequest()->retry(3, 100);
+            return $this->getPendingRequest();
         }
 
     }
